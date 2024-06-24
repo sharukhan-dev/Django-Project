@@ -1,0 +1,33 @@
+.card {
+    border: none;
+    border-radius: 10px;
+}
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+.card-text {
+    font-size: 1rem;
+    color: #555;
+}
+.list-group-item.active {
+    background-color: #343a40;
+    border-color: #343a40;
+    color: #fff;
+}
+.list-group-item a {
+    text-decoration: none;
+    color: inherit;
+}
+.list-group-item a:hover {
+    color: #007bff;
+}
+#video_list {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.embed-responsive {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}

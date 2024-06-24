@@ -1,0 +1,66 @@
+{% extends './base.html' %}
+{% load custom_filters %}
+{% load static %}
+{% block title %}
+Home | Page
+{% endblock %}
+{% block content %}
+<!-- Hero Section -->
+<div class="hero">
+    <div class="container">
+        <h1>Welcome to Up-Skill-With-Us</h1>
+        <p>Empower Your Future with Our Courses</p>
+        <br>
+        <br>
+        <div class="search-bar">
+            <input type="text" class="form-control" placeholder="Search for courses...">
+        </div>
+    </div>
+</div>
+
+<!-- All Courses -->
+<h2 class="mt-5 mb-4">All Courses</h2>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for course in courses %}
+    <div class="col mb-4">
+        <div class="card cards h-100">
+            <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.name }}">
+            <div class="card-body">
+                <h5 class="card-title cards-tit">{{ course.name }}</h5>
+                <p class="card-text cards-tex">
+                    Save {{ course.discount }}%
+                    <br>
+                    <span class="text-muted text-mut">
+                        <del>₹ {{ course.price }}</del>
+                    </span>
+                    <span class="text-success text-succ ms-2">₹ {{ course.price|discounted_price:course.discount }}</span>
+                </p>
+                {% if course.id in enrolled_courses %}
+                    <p class="text-success">Enrolled</p>
+                {% endif %}
+            </div>
+            <div class="card-footer bg-transparent border-0">
+                <div class="d-grid gap-2">
+                    {% if course.id in enrolled_courses %}
+                        <a href="{% url 'coursepage' course.slug %}" class="btn btn-prime">Start Course</a>
+                    {% else %}
+                        <a href="{% url 'confirm_enrollment' course.slug %}" class="btn btn-roll">Enroll Now</a>
+                        <a href="/course/{{ course.slug }}" class="btn btn-showmore mt-2">Show More</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Quotes -->
+<div class="quotes">
+    <p>"UpSkillWithUs has transformed my career. The courses are top-notch and the support is excellent!"</p>
+    <h4>- John Doe</h4>
+</div>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+{% endblock %}
